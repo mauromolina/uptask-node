@@ -1,0 +1,25 @@
+{
+  "name": "uptask",
+  "version": "1.0.0",
+  "description": "Proyecto UpTask con Node y MVC",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mauromolina/uptask-node.git"
+  },
+  "author": "Mauro Molina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mauromolina/uptask-node/issues"
+  },
+  "homepage": "https://github.com/mauromolina/uptask-node#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

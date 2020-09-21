@@ -6,6 +6,8 @@ const app = express();
 
 app.set('port', process.env.PORT || 3000);
 
+app.use(express.static('public'));
+
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, './views'));
 

@@ -3,3 +3,9 @@ exports.projectsHome = (req, res) => {
         pageName: 'Proyectos'
     });
 }
+
+exports.projectForm = (req, res) => {
+    res.render('projectForm', {
+        pageName: 'Nuevo Proyecto'
+    })
+}

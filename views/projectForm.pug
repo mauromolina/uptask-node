@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    .contenido-principal
+        h1 #{pageName}
+        form.agregar-proyecto
+            .campo
+                label(for="name") Nombre del Proyecto
+                input#name(type="text", name="name" placeholder="Nombre proyecto")
+            .campo.enviar
+                input(type="submit", value="Agregar").boton

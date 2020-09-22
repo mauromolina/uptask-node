@@ -1,7 +1,17 @@
 const express = require('express');
 const routes = require('./routes');
 const path = require('path');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+
+const db = require('./config/db');
+require('./models/Project');
+db.sync()
+    .then( () => {
+        console.log('DB Conectada :D');
+    })
+    .catch( error => {
+        console.log(error);
+    })
 
 const app = express();
 

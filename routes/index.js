@@ -18,5 +18,6 @@ module.exports = function() {
         body('name').not().isEmpty().trim().escape(), 
         projectController.editProject
         );
+    router.get('/project/delete/:id', projectController.deleteProject);
     return router;
 }

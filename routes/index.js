@@ -10,6 +10,7 @@ module.exports = function() {
         '/newProject',
         body('name').not().isEmpty().trim().escape(), 
         projectController.newProject
-        )
+        );
+    router.get('/projects/:url', projectController.getProject);
     return router;
 }

@@ -18,10 +18,9 @@ html(lang="en")
                 .panel.lista-proyectos
                     h2 Proyectos
                     ul#proyectos.proyectos
-                        li 
-                            a(href="#") Diseño de Tienda Virtual
-                        li
-                            a(href="#") Diseño de Nuevo Blog
-                        li
-                            a(href="#") Elegir Hosting
+                        if(projects.length)
+                            each project in projects
+                                li 
+                                    a(href=`/projects/${project.url}`)= project.name
             block content
+            //- pre= vardump(projects)

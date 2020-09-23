@@ -1,21 +1,26 @@
 const Project = require('../models/Project');
 const slug = require('slug');
 
-exports.projectsHome = (req, res) => {
+exports.projectsHome = async (req, res) => {
+    const projects = await Project.findAll();
     res.render('index', {
-        pageName: 'Proyectos'
+        pageName: 'Proyectos',
+        projects
     });
 }
 
-exports.projectForm = (req, res) => {
+exports.projectForm = async (req, res) => {
+    const projects = await Project.findAll();
     res.render('projectForm', {
-        pageName: 'Nuevo Proyecto'
+        pageName: 'Nuevo Proyecto',
+        projects
     })
 }
 
 exports.newProject = async (req, res) => {
     const { name } = req.body;
     let errors = [];
+    const projects = await Project.findAll();
     if(!name){
         errors.push({
             text: 'El nombre de proyecto es obligatorio'
@@ -24,15 +29,33 @@ exports.newProject = async (req, res) => {
     if(errors.length > 0){
         res.render('projectForm', {
             pageName: 'Nuevo Proyecto',
-            errors
+            errors,
+            projects
         })
     }
     else {
         const url = (slug(name));
         const project = Project.create({
             name,
-            url
+            url,
+            projects
         });
         res.redirect('/')
     }
+}
+
+exports.getProject = async (req, res) => {
+    const projects = await Project.findAll();
+    const project = await Project.findOne({
+        where: {
+            url: req.params.url
+        }
+    });
+    if(!project) return next();
+    console.log(project);
+    res.render('tasks', {
+        pageName: 'Tareas del proyecto',
+        project,
+        projects
+    });
 }

@@ -1,3 +1,6 @@
+const Project = require('../models/Project');
+const slug = require('slug');
+
 exports.projectsHome = (req, res) => {
     res.render('index', {
         pageName: 'Proyectos'
@@ -10,7 +13,7 @@ exports.projectForm = (req, res) => {
     })
 }
 
-exports.newProject = (req, res) => {
+exports.newProject = async (req, res) => {
     const { name } = req.body;
     let errors = [];
     if(!name){
@@ -25,6 +28,11 @@ exports.newProject = (req, res) => {
         })
     }
     else {
-        res.send('oka');
+        const url = (slug(name));
+        const project = Project.create({
+            name,
+            url
+        });
+        res.redirect('/')
     }
 }

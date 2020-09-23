@@ -18,9 +18,11 @@
   "homepage": "https://github.com/mauromolina/uptask-node#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-validator": "^6.6.1",
     "mysql2": "^2.2.5",
     "pug": "^3.0.0",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "slug": "^3.3.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

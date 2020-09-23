@@ -101,3 +101,17 @@ exports.editProjectForm = async (req, res) => {
         projects
     })
 }
+
+exports.deleteProject = async (req, res) => {
+    const { urlProject } = req.query;
+    console.log('URL: ', urlProject);    
+    const result = await Project.destroy({
+        where: {
+            url: urlProject
+        }
+    });
+    if(!result){
+        return next();
+    }
+    res.send('Proyecto eliminado correctamente');
+}

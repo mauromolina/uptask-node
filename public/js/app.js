@@ -1,1 +1,2 @@
-alert('mauro');
+import projects from './modules/projects';
+

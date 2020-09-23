@@ -101,13 +101,3 @@ exports.editProjectForm = async (req, res) => {
         projects
     })
 }
-
-exports.deleteProject = async (req, res) => {
-    await Project.destroy({
-        where: {
-            id: req.params.id
-        }
-    });
-    res.redirect('/');
-
-}

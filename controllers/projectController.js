@@ -35,10 +35,9 @@ exports.newProject = async (req, res) => {
     }
     else {
         const url = (slug(name));
-        const project = Project.create({
+        await Project.create({
             name,
-            url,
-            projects
+            url
         });
         res.redirect('/')
     }
@@ -58,4 +57,47 @@ exports.getProject = async (req, res) => {
         project,
         projects
     });
+}
+
+exports.editProject = async (req, res) => {
+    const { name } = req.body;
+    let errors = [];
+    const projects = await Project.findAll();
+    if(!name){
+        errors.push({
+            text: 'El nombre de proyecto es obligatorio'
+        })
+    }
+    if(errors.length > 0){
+        res.render('projectForm', {
+            pageName: 'Editar Proyecto',
+            errors,
+            projects
+        })
+    }
+    else {
+        await Project.update({
+            name
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        });
+        res.redirect('/')
+    }
+}
+
+exports.editProjectForm = async (req, res) => {
+    const projects = await Project.findAll();
+    const project = await Project.findOne({
+        where: {
+            id: req.params.id
+        }
+    });
+    res.render('projectForm', {
+        pageName: 'Editar Proyecto',
+        project,
+        projects
+    })
 }

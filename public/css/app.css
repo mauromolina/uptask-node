@@ -283,6 +283,12 @@ body.index {
     transition: width .3s ease;
 }
 
+.progress {
+    text-align: center;
+    margin-top: -22px;
+    font-weight: bold;
+}
+
 form.agregar-proyecto {
     max-width: 800px;
     width: 90%;

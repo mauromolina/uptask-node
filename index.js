@@ -6,6 +6,9 @@ const helper = require('./helpers');
 
 const db = require('./config/db');
 require('./models/Project');
+require('./models/Task');
+
+
 db.sync()
     .then( () => {
         console.log('DB Conectada :D');

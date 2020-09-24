@@ -232,8 +232,13 @@ body.index {
 .acciones i:last-child{
     margin-left: 3rem;
 }
+
+.empty {
+    text-align: center;
+}
+
 .completo {
-    color: #00B762;
+    color: #00B762 ;
 }
 .alerta {
     padding: .5rem;

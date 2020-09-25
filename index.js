@@ -7,6 +7,9 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const cookie = require('cookie-parser');
 const passport = require('./config/passport');
+require('dotenv').config({
+    path: 'variables.env'
+});
 
 const db = require('./config/db');
 require('./models/Project');
@@ -23,8 +26,6 @@ db.sync()
     })
 
 const app = express();
-
-app.set('port', process.env.PORT || 3000);
 
 app.use(express.static('public'));
 
@@ -56,6 +57,9 @@ app.use((req, res, next) => {
 
 app.use('/', routes())
 
-app.listen(app.get('port'), () => {
-    console.log('El servidor corre en el puerto ', app.get('port'));
+const host = process.env.HOST || '0.0.0.0';
+const port = process.env.PORT || 3000;
+
+app.listen(port, host, () => {
+    console.log('El servidor está funcionando en el puerto ', port);
 })

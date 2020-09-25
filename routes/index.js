@@ -53,8 +53,14 @@ module.exports = function() {
     );
     router.get('/newAccount', userController.newAccountForm);
     router.post('/newAccount', userController.newAccount);
+    router.get('/confirm/:email', userController.confirmAccount);
     router.get('/login', userController.loginForm);
     router.post('/login', authController.authUser);
     router.get('/logOut', authController.logOut);
+    router.get('/restore', userController.restorePasswordForm);
+    router.post('/restore', authController.sendToken);
+    router.get('/restore/:token', authController.validateToken);
+    router.post('/restore/:token', authController.restorePassword);
+
     return router;
 }

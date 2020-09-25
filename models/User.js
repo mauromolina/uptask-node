@@ -32,7 +32,13 @@ const User = db.define('users', {
                 msg: 'La contraseña es obligatoria'
             }
         }
-    }
+    },
+    active: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    token: Sequelize.STRING,
+    expiration: Sequelize.DATE
 }, {
     hooks: {
         beforeCreate(user){

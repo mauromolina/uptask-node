@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        include partials/header
+    body.login
+        .contenedor-formulario
+            h1= pageName
+            p Agrega tu e-mail para recuperar la contraseña
+            if locals.errors
+                .alertas
+                    each cat in Object.keys(locals.errors)
+                        each error in errors[cat]
+                            .alerta(class=`${cat}`)
+                                p= error
+            form.caja-login(action="/restore" method="POST")
+                .campo
+                    label(for="email") E-mail:
+                    input(type="email" name="email" placeholder="E-mail" value= email)
+                .campo.enviar
+                    input(type="submit" value="Recuperar contraseña").boton
+                .campo.acciones
+                    a(href="/login") Volver a iniciar sesión

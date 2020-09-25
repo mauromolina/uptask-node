@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const sendEmail = require('../handlers/email');
 
 exports.newAccountForm = (req, res) => {
     res.render('newAccount', {
@@ -14,6 +15,18 @@ exports.newAccount = async (req, res) => {
             email,
             password
         });
+
+        const confirmUrl = `http://${req.headers.host}/confirm/${email}`;
+        const user = {
+            email
+        }
+        await sendEmail.send({
+            user,
+            subject: 'Confirmar cuenta',
+            confirmUrl,
+            htmlFile: 'confirmMail'
+        })
+        req.flash('correcto', 'Te enviamos un correo para la confirmación de tu cuenta')
         res.redirect('/logIn');
     } catch (error) {
         console.log(error);
@@ -27,6 +40,20 @@ exports.newAccount = async (req, res) => {
     }
 }
 
+exports.confirmAccount = async (req, res) => {
+    const user = await User.findOne({
+        email: req.params.email
+    });
+    if(!user){
+        req.flash('error', 'Email inválido')
+        res.redirect('/login');
+    }
+    user.active = 1;
+    user.save();
+    req.flash('correcto', 'Tu cuenta se activó correctamente');
+    res.redirect('/login');
+}
+
 exports.loginForm = (req, res) => {
     const { error } = res.locals.errors
     res.render('login', {
@@ -34,3 +61,10 @@ exports.loginForm = (req, res) => {
         error
     });
 }
+
+exports.restorePasswordForm = (req, res) => {
+    res.render('restore', {
+        pageName: 'Recuperar contraseña'
+    })
+}
+

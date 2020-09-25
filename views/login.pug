@@ -6,8 +6,12 @@ html(lang="en")
     body.login
         .contenedor-formulario
             h1 Iniciar sesión en UpTaskMM
-            if error
-                p.alerta.error= error
+            if locals.errors
+                .alertas
+                    each cat in Object.keys(locals.errors)
+                        each error in errors[cat]
+                            .alerta(class=`${cat}`)
+                                p= error
             form#formulario.caja.caja-login(method="POST" action="/login")
                 .campo
                     label(for="email") E-mail:
@@ -17,7 +21,8 @@ html(lang="en")
                     input(type="password" name="password" placeholder="Contraseña" )
                 .campo.enviar
                     input(type="submit" value="Iniciar sesión" class="").boton
-                .campo 
+                .campo.acciones
                     a(href="/newAccount") ¿No tenés una cuenta? Registrate
+                    a(href="/restore") Olvidé mi contraseña
         
         script(src="/dist/bundle.js")

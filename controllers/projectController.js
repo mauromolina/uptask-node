@@ -5,7 +5,7 @@ const slug = require('slug');
 exports.projectsHome = async (req, res) => {
     const projects = await Project.findAll({
         where: {
-            
+            userId: res.locals.user.id
         }
     });
     console.log('USER:', req.user);
@@ -16,7 +16,11 @@ exports.projectsHome = async (req, res) => {
 }
 
 exports.projectForm = async (req, res) => {
-    const projects = await Project.findAll();
+    const projects = await Project.findAll({
+        where: {
+            userId: res.locals.user.id
+        }
+    });
     console.log('USER:', req.body);
     res.render('projectForm', {
         pageName: 'Nuevo Proyecto',
@@ -27,7 +31,11 @@ exports.projectForm = async (req, res) => {
 exports.newProject = async (req, res) => {
     const { name } = req.body;
     let errors = [];
-    const projects = await Project.findAll();
+    const projects = await Project.findAll({
+        where: {
+            userId: res.locals.user.id
+        }
+    });
     if(!name){
         errors.push({
             text: 'El nombre de proyecto es obligatorio'
@@ -41,17 +49,23 @@ exports.newProject = async (req, res) => {
         })
     }
     else {
+        const userId = res.locals.user.id; 
         const url = (slug(name));
         await Project.create({
             name,
-            url
+            url,
+            userId
         });
         res.redirect('/')
     }
 }
 
 exports.getProject = async (req, res) => {
-    const projects = await Project.findAll();
+    const projects = await Project.findAll({
+        where: {
+            userId: res.locals.user.id
+        }
+    });
     const project = await Project.findOne({
         where: {
             url: req.params.url
@@ -75,7 +89,11 @@ exports.getProject = async (req, res) => {
 exports.editProject = async (req, res) => {
     const { name } = req.body;
     let errors = [];
-    const projects = await Project.findAll();
+    const projects = await Project.findAll({
+        where: {
+            userId: res.locals.user.id
+        }
+    });
     if(!name){
         errors.push({
             text: 'El nombre de proyecto es obligatorio'
@@ -102,7 +120,11 @@ exports.editProject = async (req, res) => {
 }
 
 exports.editProjectForm = async (req, res) => {
-    const projects = await Project.findAll();
+    const projects = await Project.findAll({
+        where: {
+            userId: res.locals.user.id
+        }
+    });
     const project = await Project.findOne({
         where: {
             id: req.params.id

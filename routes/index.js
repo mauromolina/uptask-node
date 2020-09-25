@@ -55,5 +55,6 @@ module.exports = function() {
     router.post('/newAccount', userController.newAccount);
     router.get('/login', userController.loginForm);
     router.post('/login', authController.authUser);
+    router.get('/logOut', authController.logOut);
     return router;
 }

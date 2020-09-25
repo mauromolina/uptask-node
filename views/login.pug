@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        head
+        include partials/header
+    body.login
+        .contenedor-formulario
+            h1 Iniciar sesión en UpTaskMM
+            if error
+                p.alerta.error= error
+            form#formulario.caja.caja-login(method="POST" action="/login")
+                .campo
+                    label(for="email") E-mail:
+                    input(type="email" name="email" placeholder="E-mail" value= email)
+                .campo
+                    label(for="password") Contraseña:
+                    input(type="password" name="password" placeholder="Contraseña" )
+                .campo.enviar
+                    input(type="submit" value="Iniciar sesión" class="").boton
+                .campo 
+                    a(href="/logIn") ¿No tenés una cuenta? Registrate
+        
+        script(src="/dist/bundle.js")

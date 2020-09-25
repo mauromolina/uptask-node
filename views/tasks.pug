@@ -10,7 +10,7 @@ block content
                 input.nombre-tarea(type="text" name="task" placeholder="Nombre tarea")
             .campo.enviar
                 input.boton.nueva-tarea(type="submit" value="Agregar")
-        .listado-pendientes
+        .listado-pendientes#listado
             ul
                 if tasks.length
                     each task in tasks

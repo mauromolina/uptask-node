@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        head
+        include partials/header
+    body.login
+        .contenedor-formulario
+            h1 Nueva cuenta en UpTaskMM
+            if locals.errors
+                .alertas
+                    each cat in Object.keys(locals.errors)
+                        each error in errors[cat]
+                            .alerta(class=`${cat}`)
+                                if error === 'users.users_email_unique must be unique'
+                                    p= 'Error! Usuario ya registrado'
+                                else
+                                    p= error
+            form#formulario.caja.caja-login(method="POST" action="/newAccount")
+                .campo
+                    label(for="email") E-mail:
+                    input(type="email" name="email" placeholder="E-mail" value= email)
+                .campo
+                    label(for="password") Contraseña:
+                    input(type="password" name="password" placeholder="Contraseña" )
+                .campo.enviar
+                    input(type="submit" value="Crear cuenta" class="").boton
+                .campo 
+                    a(href="/logIn") ¿Ya tenés una cuenta? Inicia sesión
+        
+        script(src="/dist/bundle.js")

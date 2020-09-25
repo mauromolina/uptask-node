@@ -3,7 +3,12 @@ const Task = require('../models/Task');
 const slug = require('slug');
 
 exports.projectsHome = async (req, res) => {
-    const projects = await Project.findAll();
+    const projects = await Project.findAll({
+        where: {
+            
+        }
+    });
+    console.log('USER:', req.user);
     res.render('index', {
         pageName: 'Proyectos',
         projects
@@ -12,6 +17,7 @@ exports.projectsHome = async (req, res) => {
 
 exports.projectForm = async (req, res) => {
     const projects = await Project.findAll();
+    console.log('USER:', req.body);
     res.render('projectForm', {
         pageName: 'Nuevo Proyecto',
         projects
